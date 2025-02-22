@@ -1,0 +1,23 @@
+
+<div class="chat-container">
+  <!-- 聊天消息区域 -->
+  <div class="chat-body" #messageContainer>
+    <span *ngFor="let response of chatResponses">
+      <span *ngFor="let choice of response.choices">
+        {{choice.delta.content}}
+        <br *ngIf="choice.finish_reason === 'stop'">
+     </span>
+   </span>
+  </div>
+  <!-- 输入区域 -->
+  <div class="chat-tools">
+    <input type="text" class="chat-input"
+           [(ngModel)]="userInput"
+           (keyup.enter)="sendMessage()"
+           placeholder="输入消息...">
+    <button (click)="sendMessage()" class="chat-send"
+            [disabled]="!userInput.trim()">
+      发送
+    </button>
+  </div>
+</div>
